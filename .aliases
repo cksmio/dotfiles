@@ -1,5 +1,4 @@
 # vim: set filetype=sh :
-# bat: set language=.bash_aliases :
 
 alias ls="ls --color=auto"
 alias ll="ls -Aclhp --time-style=long-iso --color=auto"
@@ -11,8 +10,8 @@ alias real="source ~/.aliases"
 alias mgd="google-drive-ocamlfuse ~/myGoogleDrive"
 alias cdgd="cd ~/myGoogleDrive"
 
+#alias b='bat --color auto --tabs 4 --theme 1337 --pager "less -RF"' 
 alias b="bat"
-#--color auto --tabs 4 --theme 1337 --pager "less -RF"' 
 alias bsa="bat --show-all --color auto --tabs 4" 
 alias c="clear"
 alias v="nvim"
