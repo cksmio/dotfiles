@@ -1,0 +1,28 @@
+# vim: set filetype=sh :
+# ensure 256color support in terminal/tmux
+# set xterm-256color (we're using tmux-256color in ~/.tmux.conf)
+export TERM=xterm-256color
+
+# set bash to vi mode (instead of default emacs mode)
+# warning: Ctrl+l now doesn't clear anymore. Use `c` instead (cf .aliases)
+set -o vi
+
+# ocaml/opam configuration (used by/during google-drive-ocamlfuse installation; can be disabled afterwards)
+# test -r /home/vicc/.opam/opam-init/init.sh && . /home/vicc/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+# source rust cargo env
+. "$HOME/.cargo/env"
+
+# start ssh-agent (for github etc)
+# eval "$(ssh-agent -s)"
+
+# User specific PATH bin-environment
+# NOTE: this is ocaml specific; if you build or have binaries yourself
+# that are not system-wide but restricted to your user only, 
+# put them in ~/.local/bin (preferred) or in ~/bin
+if ! [[ "$PATH" =~ "$HOME/.opam/default/bin:" ]]
+then
+    PATH="$HOME/.opam/default/bin:$PATH"
+fi
+export PATH
+export EDITOR=/usr/bin/vim

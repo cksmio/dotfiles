@@ -1,0 +1,24 @@
+# vim: set filetype=sh :
+# bat: set language=.bash_aliases :
+
+alias ls="ls --color=auto"
+alias ll="ls -Aclhp --time-style=long-iso --color=auto"
+alias l="ls -Achp --color=auto"
+alias real="source ~/.aliases"
+
+# automatically mount/connect to GoogleDrive
+# https://github.com/astrada/google-drive-ocamlfuse
+alias mgd="google-drive-ocamlfuse ~/myGoogleDrive"
+alias cdgd="cd ~/myGoogleDrive"
+
+alias b="bat"
+#--color auto --tabs 4 --theme 1337 --pager "less -RF"' 
+alias bsa="bat --show-all --color auto --tabs 4" 
+alias c="clear"
+alias v="nvim"
+alias o="xdg-open"
+alias less="less -RF --color=auto --use-color"
+
+# mtp = markdown-to-pdf using pandoc and texlive using the eisvogel template
+# https://github.com/Wandmalfarbe/pandoc-latex-template
+alias mtp="pandoc $1 -o $1.pdf --from markdown --template eisvogel --listings"
