@@ -1,4 +1,4 @@
-" neovim config chrisv -- superset of ~/.vimrc
+" neovim config vicc -- superset of ~/.vimrc
 " ~/.config/nvim/init.vim 
 
 "set nocompatible		" neovim is always nocompatible
