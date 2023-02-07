@@ -17,7 +17,7 @@ alias bsa="bat --show-all --color auto --tabs 4"
 alias c="clear"
 alias v="nvim"
 alias o="xdg-open"
-alias less="less -RF --color=auto --use-color"
+alias less="less -RFgNSw -x4"
 
 # mtp = markdown-to-pdf using pandoc and texlive using the eisvogel template
 # https://github.com/Wandmalfarbe/pandoc-latex-template
