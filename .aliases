@@ -1,9 +1,14 @@
 # vim: set filetype=sh :
 
-alias ls="ls --color=auto"
-alias ll="ls -Aclhp --time-style=long-iso --color=auto"
-alias l="ls -Achp --color=auto"
 alias real="source ~/.aliases"
+
+# use exa instead of ls
+#alias ls="ls --color=auto"
+#alias ll="ls -Aclhp --time-style=long-iso --color=auto"
+#alias l="ls -Achp"
+alias ls="/usr/bin/exa --color=auto"
+alias ll="ls -Falgb --time-style=long-iso --git --color-scale"
+alias l="ls -FaG"
 
 # automatically mount/connect to GoogleDrive
 # https://github.com/astrada/google-drive-ocamlfuse
@@ -21,3 +26,8 @@ alias less="less -RFgNSw -x4"
 # mtp = markdown-to-pdf using pandoc and texlive using the eisvogel template
 # https://github.com/Wandmalfarbe/pandoc-latex-template
 alias mtp="pandoc $1 -o $1.pdf --from markdown --template eisvogel --listings"
+
+# alias config for dotfiles
+# https://github.com/cksmio/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
