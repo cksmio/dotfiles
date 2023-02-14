@@ -169,63 +169,63 @@ set statusline+=\ 		" extra padding whitespace
 " plugins (using Plug)
 "
 call plug#begin()
-" The default plugin directory will be as follows:
-"   - Vim (Linux/macOS): '~/.vim/plugged'
-"   - Vim (Windows): '~/vimfiles/plugged'
-"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
-" You can specify a custom plugin directory by passing it as the argument
-"   - e.g. `call plug#begin('~/.vim/plugged')`
-"   - Avoid using standard Vim directory names like 'plugin'
-" Make sure you use single quotes
-
-" kanagawa theme - riding the great wave...
-Plug 'rebelot/kanagawa.nvim'
-
-" Telescope and deps
-" https://github.com/nvim-telescope/telescope.nvim
-"Plug 'phan/phan'				     " php
-"Plug 'richterger/Perl-LanguageServer'		     " perl
-"Plug 'sourcegraph/go-langserver'		     " go
-"Plug 'sourcegraph/javascript-typescript-langserver'
-"Plug 'rcjsuen/dockerfile-language-server-nodejs'
-"Plug 'mads-hartmann/bash-language-server'
-"Plug 'nvim-treesitter/nvim-treesitter' 
-"Plug 'sharkdp/fd'
-"Plug 'burntsushi/ripgrep'
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
-" or                                , { 'branch': '0.1.x' }
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" Plug 'junegunn/vim-easy-align'
-" 
-" " Any valid git URL is allowed
-" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" 
-" " Multiple Plug commands can be written in a single line using | separators
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-" 
-" " On-demand loading
-" Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-" 
-" " Using a non-default branch
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-" 
-" " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-" Plug 'fatih/vim-go', { 'tag': '*' }
-" 
-" " Plugin options
-" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-" 
-" Plugin outside ~/.vim/plugged with post-update hook
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" 
-" " Unmanaged plugin (manually installed and updated)
-" Plug '~/my-prototype-plugin'
-" 
-" " Initialize plugin system
-" " - Automatically executes `filetype plugin indent on` and `syntax enable`.
+    " The default plugin directory will be as follows:
+    "   - Vim (Linux/macOS): '~/.vim/plugged'
+    "   - Vim (Windows): '~/vimfiles/plugged'
+    "   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+    " You can specify a custom plugin directory by passing it as the argument
+    "   - e.g. `call plug#begin('~/.vim/plugged')`
+    "   - Avoid using standard Vim directory names like 'plugin'
+    " Make sure you use single quotes
+    
+    " kanagawa theme - riding the great wave...
+    Plug 'rebelot/kanagawa.nvim'
+    
+    " Telescope and deps
+    " https://github.com/nvim-telescope/telescope.nvim
+    "Plug 'phan/phan'				     " php
+    "Plug 'richterger/Perl-LanguageServer'		     " perl
+    "Plug 'sourcegraph/go-langserver'		     " go
+    "Plug 'sourcegraph/javascript-typescript-langserver'
+    "Plug 'rcjsuen/dockerfile-language-server-nodejs'
+    "Plug 'mads-hartmann/bash-language-server'
+    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' } 
+    "Plug 'sharkdp/fd'
+    "Plug 'burntsushi/ripgrep'
+    "Plug 'nvim-lua/plenary.nvim'
+    "Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+    " or                                , { 'branch': '0.1.x' }
+    
+    " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+    " Plug 'junegunn/vim-easy-align'
+    " 
+    " " Any valid git URL is allowed
+    " Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+    " 
+    " " Multiple Plug commands can be written in a single line using | separators
+    " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    " 
+    " " On-demand loading
+    " Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+    " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+    " 
+    " " Using a non-default branch
+    " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+    " 
+    " " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+    " Plug 'fatih/vim-go', { 'tag': '*' }
+    " 
+    " " Plugin options
+    " Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+    " 
+    " Plugin outside ~/.vim/plugged with post-update hook
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    " 
+    " " Unmanaged plugin (manually installed and updated)
+    " Plug '~/my-prototype-plugin'
+    " 
+    " " Initialize plugin system
+    " " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 
 color kanagawa
@@ -272,7 +272,7 @@ fun! Start()
 
     " Now we can just write to the buffer, whatever you want.
     call append('$', "")
-    for line in split(system('fortune -so'), '\n')
+    for line in split(system('fortune -no'), '\n')
         call append('$', '        ' . l:line)
     endfor
 
@@ -289,4 +289,57 @@ endfun
 autocmd VimEnter * call Start()
 
 
+function! CurrentLineInfo()
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the four listed parsers should always be installed)
+  ensure_installed = { "rust", "go", "php", "html", "css", "perl", 
+	"bash", "yaml", "json", "markdown", "c", "lua", "vim", "help" 
+    },
 
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  -- ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+--     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+--     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+--     -- the name of the parser)
+--     -- list of language that will be disabled
+--     disable = { "c", "rust" },
+--     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+--     disable = function(lang, buf)
+--         local max_filesize = 100 * 1024 -- 100 KB
+--         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+--         if ok and stats and stats.size > max_filesize then
+--             return true
+--         end
+--     end,
+-- 
+--     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--     -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--     -- Instead of true it can also be a list of languages
+--     additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+endfunction
+
+call CurrentLineInfo()
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable                     " Disable folding at startup.
