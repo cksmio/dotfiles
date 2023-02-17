@@ -30,3 +30,5 @@ unset rc
 # source my custom functions, exports etc via .bashme and my aliases via .aliases
 . ~/.bashme
 . ~/.aliases
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
