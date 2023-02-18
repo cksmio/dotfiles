@@ -1,27 +1,25 @@
 " neovim config vicc -- superset of ~/.vimrc
 " ~/.config/nvim/init.vim 
 
-"set nocompatible		" neovim is always nocompatible
+set shell=/bin/bash
 
-" make backups
+let mapleader = "\<Space>"
+set timeoutlen=500  " Set timeout length to 500 ms
+set showcmd	    " shows that leaderkey was pressed for duruation timeoulen
+
+"set nocompatible   " neovim is always nocompatible
+
+" backups etc ==================================================================
 set backup " make backup file
-"set backupdir=~/vimfiles/backup " where to put backup file
-"set directory=~/vimfiles/temp " directory is the directory for temp file
-set backupdir=~/.vimtmp,~/.bak,~/.tmp,/tmp
+set backupdir=~/.vimtmp,~/.bak,~/.tmp,/tmp,~/vimfiles/backup,~/vimfiles/temp " backup-file location
+set directory=~/.vimtmp,~/.bak,~/.tmp,/tmp,~/vimfiles/backup,~/vimfiles/temp " temp-file location
 set backupext='.bak'
 
+" tabs, as in... #space, -denting, etc. =================================
 " main way #1 to use tabs: use a mix of tabs and spaces, but typing
 " <Tab> and <BS> will behave like a tab appears every 4 (or 3) characters.
 set noexpandtab			" do not subst tabs with spaces 
 set tabstop=8			" Number of spaces that a <Tab> in the file counts for. 
-" Language-specific
-au FileType yaml set ts=2 sw=2 sts=2
-au FileType html set ts=2 sw=2 sts=2
-
-" Follow the leader....
-let mapleader = ' '  " set leader key to space
-set timeoutlen=500 " Set timeout length to 500 ms
-set showcmd	    " shows that leaderkey was pressed for duruation timeoulen
 
 " softtabstop - Number of spaces that a <Tab> counts for while performing editing
 " operations, like inserting a <Tab> or using <BS>.  It 'feels' like
@@ -33,22 +31,53 @@ set softtabstop=4
 
 " shiftwidth - Number of spaces to use for each step of (auto)indent.
 set shiftwidth=4
-
-" autoindent - when noexpandtab is set, autoindent also allows 
-" shifting tabs left/right when v/V with < and > resp.)
-set autoindent
-
-set wrap			" always wrap long lines
+" Language-specific
+au FileType yaml set ts=2 sw=2 sts=2
+au FileType json set ts=2 sw=2 sts=2
+au FileType html set ts=2 sw=2 sts=2
+au FileType css set ts=2 sw=2 sts=2
+au FileType xml set ts=2 sw=2 sts=2
 
 " smarttab - When on, a <Tab> in front of a line inserts blanks according to
 " 'shiftwidth'.  'tabstop' or 'softtabstop' is used in other places.
 " A <BS> will delete a 'shiftwidth' worth of space at the start of the line
 set smarttab
 
+" autoindent - when noexpandtab is set, autoindent also allows 
+" shifting tabs left/right when v/V with < and > resp.)
+set autoindent
+
+" tabs, as in... those file-seperator-thingies up top ================= 
+set showtabline=1          	" no tabs
+"set showtabline=2          	" yes tabs; jump around with tabnext tabprev tab... etc
+"" if tabs then navigate tabs quickly with Ctrl+PageUp/PageDown 
+"imap <C-N> <ESC>:tabnew<CR>
+"nmap <C-N> <ESC>:tabnew<CR>
+"imap <C-W> <ESC>:tabclose<CR>
+"nmap <C-W> <ESC>:tabclose<CR>
+"imap <C-PageUp> <ESC>:tabprev<CR>
+"nmap <C-PageUp> <ESC>:tabprev<CR>
+"imap <C-PageDown> <ESC>:tabnext<CR>
+"nmap <C-PageDown> <ESC>:tabnext<CR>
+
+" buffers ===================================================================
+" navigate quickly next/prev with Alt-h/l
+imap <M-h> <ESC>:bn<CR>
+nmap <M-h> <ESC>:bn<CR>
+xnoremap <M-h> <ESC>:bn<CR>
+nnoremap <M-h> <ESC>:bn<CR>
+imap <M-l> <ESC>:bp<CR>
+nmap <M-l> <ESC>:bp<CR>
+xnoremap <M-l> <ESC>:bp<CR>
+nnoremap <M-l> <ESC>:bp<CR>
+
+" window-(re)sizing etc =====================================================
+set wrap			" always wrap long lines
+
 " allow Ctrl+W+_ to resize a split tompletely (keeping only the statusbar of
 " other splits)
 set winminheight=0
-" alt-jk allow resizing up/down of horizontal splits (TBD: maybe also add hl)
+" alt-jk allow resizing up/down of horizontal splits 
 " do know that if in the bottom split and pressing <M-k> your statusline moves
 " up... but you can of course simply reverse it with <M-j>
 nnoremap <M-k> :resize -1<CR>
@@ -56,33 +85,10 @@ nnoremap <M-u> :resize -10<CR>
 nnoremap <M-j> :resize +1<CR>
 nnoremap <M-d> :resize +10<CR>
 
-" ctrl+hjkl jump between splits as expected (too lazy to type C-W...)
-" nnoremap <C-h> <C-W><C-h><CR>
-" nnoremap <C-j> <C-W><C-j><CR>
-" nnoremap <C-k> <C-W><C-k><CR>
-" nnoremap <C-l> <C-W><C-l><CR>
 
-" vimtip#173 -- switch between splits very fast
-"map <C-J> <C-W>j<C-W>_
-"map <C-K> <C-W>k<C-W>_ 
-
-" remap Ctrl-j and Ctrl-k to be same as Ctrl-n and Ctrl-p resp.
-imap <C-J> <C-N>
-"nmap <C-J> <C-N>
-vmap <C-J> <C-N>
-"nnoremap <C-J> <C-N>
-xnoremap <C-J> <C-N>
-
-imap <C-K> <C-P>
-"nmap <C-K> <C-P>
-vmap <C-K> <C-P>
-"nnoremap <C-K> <C-P>
-xnoremap <C-K> <C-P>
-
-"Ctrl+S saves, both in insert- and normal mode...
-imap <C-S> <ESC>:w<CR>
-nmap <C-S> <ESC>:w<CR>
-
+" moving (stuff) around ======================================================
+map <Home> 1G
+map <End> G
 " Tip #646: moving lines up/down in a file -- note#2
 " move the current line up or down
 nmap <C-Down>  :m+<CR>==
@@ -103,73 +109,32 @@ xnoremap <C-Left> <gv
 nnoremap <C-Right> >>_
 nnoremap <C-Left> <<_
 
-
-" tabs
-set showtabline=1          	" no tabs
-"set showtabline=2          	" yes tabs; jump around with tabnext tabprev tab... etc
-" " navigate tabs quickly with Ctrl+PageUp/PageDown 
-" imap <C-N> <ESC>:tabnew<CR>
-" nmap <C-N> <ESC>:tabnew<CR>
-" imap <C-W> <ESC>:tabclose<CR>
-" nmap <C-W> <ESC>:tabclose<CR>
-" imap <C-PageUp> <ESC>:tabprev<CR>
-" nmap <C-PageUp> <ESC>:tabprev<CR>
-" imap <C-PageDown> <ESC>:tabnext<CR>
-" nmap <C-PageDown> <ESC>:tabnext<CR>
-
-" buffers
-" navigate quickly next/prev with Alt-h/l
-imap <M-h> <ESC>:bn<CR>
-nmap <M-h> <ESC>:bn<CR>
-xnoremap <M-h> <ESC>:bn<CR>
-nnoremap <M-h> <ESC>:bn<CR>
-imap <M-l> <ESC>:bp<CR>
-nmap <M-l> <ESC>:bp<CR>
-xnoremap <M-l> <ESC>:bp<CR>
-nnoremap <M-l> <ESC>:bp<CR>
-
-set hlsearch
-" Ctrl+\ clears highlighting search results
-nmap <C-\> <ESC>:nohlsearch<CR>
-
-map <Home> 1G
-map <End> G
+" quick timesaving shortcuts =================================================
+"Ctrl+S saves, both in insert- and normal mode...
+imap <C-S> <ESC>:w<CR>
+nmap <C-S> <ESC>:w<CR>
 
 
+" eyecandy to improve *productivity* =========================================
 set number
 set relativenumber
 "set nocopyindent
+set cursorline " no underlining of current/cursor line
+set smartindent " indent next line (c-like programmaming languages)
+set noautoindent " warning: set autoindent may result in copy paste horrorshow
+set cmdheight=1 " always have the statusbar visible;
+set cmdwinheight=7 " number of screen lines to use for the command-line (!) window
+set numberwidth=5 " allow 'bigger' files
 
-" cursorline: no underlining of current/cursor line
-set cursorline
-
-" smartindent next line (c-like programmaming languages)
-set smartindent
-
-" warning: set autoindent may result in copy paste horrorshow
-set noautoindent
-"
-" cmdheight: always have the statusbar visible; you may need its info in cmd mode...
-set cmdheight=1
-
-" cwh/cmdwinheight: number of screen lines to use for the command-line (!) window
-set cmdwinheight=7
-
-" prepare for 'bigger' files...
-set numberwidth=5
-
-" build statusline -- with some inspiration from https://shapeshed.com/vim-statuslines/
+" build statusline ===========================================================
+"  -- cf. https://shapeshed.com/vim-statuslines/
 set laststatus=2           	" always show statusline with filename
 set statusline=
-"set statusline+=%#PmenuSel#
-"set statusline+=%{StatuslineGit()}
-"set statusline+=%#LineNr#
 set statusline+=\ %n		" buffernr
 set statusline+=\ %F		" filename
 set statusline+=%m\ 		" [+] or [-] (only if set modifiable)
 set statusline+=%r\ 		" readonly flag
 set statusline+=%=		" nothing in middlecolumn-part
-"set statusline+=%#CursorColumn#	" start of rightcolumn- part
 set statusline+=\ %y		" space, then type of file e.g. [vim]
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}	" space+fileencoding (utf-8 etc)
 set statusline+=\[%{&fileformat}\] 	" file format [unix/dos]
@@ -179,9 +144,7 @@ set statusline+=\ L%l:C%c		" buffernr:linenr:columnr
 set statusline+=\ 		" extra padding whitespace
 
 
-
-" plugins (using Plug)
-"
+" Plug-ins ==================================================================
 call plug#begin()
     " The default plugin directory will be as follows:
     "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -192,6 +155,10 @@ call plug#begin()
     "   - Avoid using standard Vim directory names like 'plugin'
     " Make sure you use single quotes
     
+    Plug 'preservim/nerdtree'
+    " ...or load it on-demand
+    " Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+
     " kanagawa theme - greyish bg - riding the great wave...
     Plug 'rebelot/kanagawa.nvim'
     " ego theme - black bg
@@ -263,8 +230,6 @@ call plug#begin()
     " " Multiple Plug commands can be written in a single line using | separators
     " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     " 
-    " " On-demand loading
-    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
     " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
     " 
     " " Using a non-default branch
@@ -284,6 +249,7 @@ call plug#begin()
     " " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 
+" colors, highlighting, etc ===========================================================
 " color ego
 color kanagawa
 " color slate
@@ -299,10 +265,12 @@ hi clear CursorColumn
 hi clear Cursorline
 hi clear MarkdownUrl
 
+set hlsearch
+" Ctrl+\ clears highlighting search results
+nmap <C-\> <ESC>:nohlsearch<CR>
 set cursorline
 
-
-
+" treesitter ==========================================================================
 function! CurrentLineInfo()
 lua << EOF
 require'nvim-treesitter.configs'.setup {
@@ -327,7 +295,6 @@ require'nvim-treesitter.configs'.setup {
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
   highlight = {
-    -- `false` will disable the whole extension
     enable = true,
 
 --     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
@@ -336,19 +303,19 @@ require'nvim-treesitter.configs'.setup {
 --     -- list of language that will be disabled
 --     disable = { "c", "rust" },
 --     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
---     disable = function(lang, buf)
---         local max_filesize = 100 * 1024 -- 100 KB
---         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
---         if ok and stats and stats.size > max_filesize then
---             return true
---         end
---     end,
+    disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end,
 -- 
 --     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 --     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
 --     -- Using this option may slow down your editor, and you may see some duplicate highlights.
 --     -- Instead of true it can also be a list of languages
---     additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = true,
   },
   indent = {
       enable = true
@@ -361,19 +328,17 @@ EOF
 endfunction
 call CurrentLineInfo()
 
-" remaps after plugin init ...
-
+" remaps for Plugins =========================================================
 nnoremap <leader>ne <cmd>NERDTreeToggle<cr>
 "
 " https://github.com/nvim-telescope/telescope.nvim#pickers
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-
 " requires ripgrep:
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
+"
 " nvim-cmp setup: https://github.com/hrsh7th/nvim-cmp
 function! VimCmpLoader()
 lua << EOFcmp
@@ -460,7 +425,8 @@ endfunction
 
 call VimCmpLoader()
 
-" Folding...
+
+" Folding (when in nvim, use treesitter) ========================================
 " enable folding, and fold every indented blocks
 " how to use zi/zm/zr >>> :help folding
 " set foldenable
@@ -477,6 +443,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable                     " Disable folding at startup.
 
 
+" scratchbuffers ==============================================================
 " make starting a new scratch buffer (like on startup with no args, or via
 " <leader>ss) a bit more offensive...
 fun! StartNewOffensiveScratchBuffer()
