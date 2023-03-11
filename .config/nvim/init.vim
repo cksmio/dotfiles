@@ -218,7 +218,7 @@ call plug#begin()
     " Syntactic language support (Language Servers)
     " https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     Plug 'cespare/vim-toml', {'branch': 'main'}
-    " Plug 'stephpy/vim-yaml'
+    "Plug 'stephpy/vim-yaml'
     " Plug 'redhat-developer/yaml-language-server'
     Plug 'rust-lang/rust.vim'
     Plug 'rhysd/vim-clang-format'
@@ -233,7 +233,8 @@ call plug#begin()
     Plug 'artempyanykh/marksman'
 
     " JSON/YAML linter for creating automated style guides, with baked in support for OpenAPI v2 & v3:
-    Plug 'luizcorreia/spectral-language-server' 
+    " not a lot of use of this one... and folds terribly...
+    "Plug 'luizcorreia/spectral-language-server' 
 
     Plug 'phan/phan' "php
     Plug 'richterger/Perl-LanguageServer' "perlls
@@ -317,7 +318,7 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- list of parser names, or "all" 
   ensure_installed = { "rust", "go", "php", "html", "css", "perl", 
-	"bash", "yaml", "json", "markdown", "c", "lua", "vim", "help",
+	"bash", "json", "markdown", "c", "lua", "vim", "help",
 	"todotxt", "terraform", "sql", "regex", "mermaid", "markdown_inline", "ini", "diff",
 	"comment", "dockerfile" 
     },
@@ -429,14 +430,14 @@ lua << EOFcmp
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   lspconfig['phan'].setup {}
   lspconfig['perlls'].setup {}
-  lspconfig['spectral'].setup {}
+  --lspconfig['spectral'].setup {}
+  --lspconfig['yamlls'].setup {}
   lspconfig['marksman'].setup {}
   lspconfig['dockerls'].setup {}
   lspconfig['bashls'].setup {}
   --require('lspconfig').['phan'].setup {}
   --require('lspconfig').['perlls'].setup {}
   --require('lspconfig').['spectral'].setup {}
-  ----require('lspconfig').['yamlls'].setup {}
   --require('lspconfig').['marksman'].setup {}
   ----require('lspconfig').['go-langserver'].setup {}
   ----require('lspconfig').['javascript-typescript-langserver'].setup {}
@@ -682,14 +683,15 @@ imap <F1> <Esc>
 " Folding (when in nvim, use treesitter) ======================================
 " enable folding, and fold every indented blocks
 " how to use zi/zm/zr >>> :help folding
-" set foldenable
-" set foldmethod=indent
-" set foldlevel=1
+set foldenable
+set foldmethod=indent
+set foldlevel=1
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-" set foldexpr=getline(v:lnum)[0]==\"\\t\"
-set nofoldenable                     " Disable folding at startup.
+" treesitter folding is a mess... try out again later when more stable
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+" " set foldexpr=getline(v:lnum)[0]==\"\\t\"
+" set nofoldenable                     " Disable folding at startup.
 
 " <space><Tab> to toggle folds.
 nnoremap <leader><Tab> za
@@ -712,7 +714,7 @@ fun! StartNewOffensiveScratchBuffer()
         \ nolist
         \ nonumber
         \ noswapfile
-	\ nofoldenable
+				\ nofoldenable
         \ norelativenumber
 
     " Now we can just write to the buffer, whatever you want.
@@ -776,6 +778,8 @@ au Filetype rust set colorcolumn=100
 " Help filetype detection
 autocmd BufRead *.plot set filetype=gnuplot
 autocmd BufRead *.md set filetype=markdown
+autocmd BufRead *.yaml set filetype=yaml
+autocmd BufRead *.yml set filetype=yaml
 autocmd BufRead *.pl set filetype=perl
 autocmd BufRead *.pm set filetype=perl
 autocmd BufRead *.qf3 set filetype=php
